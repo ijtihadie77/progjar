@@ -3,6 +3,11 @@ import socket
 import time
 import sys
 
+def get_file(nama):
+	myfile = open(nama)
+	return myfile.read()
+
+
 class MemprosesClient(threading.Thread):
 	def __init__(self,client_socket,client_address,nama):
 		self.client_socket = client_socket
@@ -16,6 +21,9 @@ class MemprosesClient(threading.Thread):
         		data = self.client_socket.recv(32)
             		if data:
 				message = message + data #collect seluruh data yang diterima
+				if (message.endswith("\r\n\r\n")):
+					self.client_socket.send(get_file('gambar.jpg'))
+					break
             		else:
                			break
 		self.client_socket.close()
