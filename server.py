@@ -16,6 +16,10 @@ class MemprosesClient(threading.Thread):
         		data = self.client_socket.recv(32)
             		if data:
 				message = message + data #collect seluruh data yang diterima
+                                if (message.endswith("\r\n\r\n")):  #pada webserver, request diakhiri dengan CRLF CRLF
+                                        print all_request
+                                        break
+
             		else:
                			break
 		self.client_socket.close()
