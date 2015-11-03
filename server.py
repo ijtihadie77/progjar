@@ -18,7 +18,7 @@ class MemprosesClient(threading.Thread):
 				message = message + data #collect seluruh data yang diterima
                                 if (message.endswith("\r\n\r\n")):  #pada webserver, request diakhiri dengan CRLF CRLF
                                         all_request = message.split("\r\n") #memisahkan header satu dengan yang lain
-                                        print all_request
+					# reply ke client dengan sesuatu
 					break
 
             		else:
