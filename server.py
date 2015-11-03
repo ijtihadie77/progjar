@@ -3,6 +3,15 @@ import socket
 import time
 import sys
 
+def handle_get(client_socket, uri):
+	client_socket.send('Hai Apa Kabar ')
+	return
+
+def handle_post(client_socket,uri):
+	client_socket.send('Hai Apa Kabar POST')
+	return
+
+
 class MemprosesClient(threading.Thread):
 	def __init__(self,client_socket,client_address,nama):
 		self.client_socket = client_socket
@@ -19,6 +28,14 @@ class MemprosesClient(threading.Thread):
                                 if (message.endswith("\r\n\r\n")):  #pada webserver, request diakhiri dengan CRLF CRLF
                                         all_request = message.split("\r\n") #memisahkan header satu dengan yang lain
 					# reply ke client dengan sesuatu
+					request_pertama = all_request[0].split(' ')
+					tipe_request = request_pertama[0]
+					uri = request_pertama[1]
+					versi_http = request_pertama[2]
+					if (tipe_request=='GET'):
+						handle_get(self.client_socket, uri)
+					if (tipe_request=='POST'):
+						handle_post(self.client_socket, uri)
 					break
 
             		else:
