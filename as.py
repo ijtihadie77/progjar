@@ -2,9 +2,6 @@ import logging
 import asyncore
 import socket
  
-logging.basicConfig(level=logging.DEBUG, format="%(created)-15s %(msecs)d %(levelname)8s %(thread)d %(name)s %(message)s")
-log                     = logging.getLogger(__name__)
- 
 BACKLOG                 = 5
 SIZE                    = 1024
  
